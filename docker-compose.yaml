@@ -1,24 +1,31 @@
 services:
+  app:
+    build: .
+    container_name: webscraping-app
+    ports:
+      - "5000:5000"
+    environment:
+      - MINIO_ROOT_USER=${MINIO_ROOT_USER}
+      - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}
+    volumes:
+      - .:/app 
+    command: ["/opt/venv/bin/python", "app.py"] 
+    depends_on:
+      - minio
+
   minio:
     image: minio/minio
     container_name: minio
     ports:
-      - "9000:9000" # Port to access S3 API
-      - "9090:9090" # Port to access the administrative panel
+      - "9000:9000"  
+      - "9090:9090"  
     environment:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER}
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
     volumes:
-      - minio_data:/data
+      - minio_data:/data 
     command: server /data --console-address ":9090"
-    restart: unless-stopped   
-    deploy:
-      resources:
-        limits:
-          memory: 2g        
-          cpus: "1.0"       
-        reservations:
-          memory: 512m 
+
 volumes:
   minio_data:
-    driver: local
+    driver: local  

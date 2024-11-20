@@ -1,0 +1,11 @@
+FROM minio/minio
+
+ENV MINIO_ACCESS_KEY=${MINIO_ROOT_USER}
+ENV MINIO_SECRET_KEY=${MINIO_ROOT_PASSWORD}
+
+RUN mkdir -p /data
+
+ENTRYPOINT ["minio"]
+CMD ["server", "/data"]
+
+EXPOSE 9000

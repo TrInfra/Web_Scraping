@@ -6,7 +6,6 @@ ENV MINIO_SECRET_KEY=${MINIO_ROOT_PASSWORD}
 RUN mkdir -p /data && chmod -R 755 /data
 
 ENTRYPOINT ["minio"]
-CMD ["server", "/data"]
+EXPOSE 34219
 
-EXPOSE 9000
-EXPOSE 9001
+CMD ["server", "/data", "--address", ":34219"]

@@ -3,8 +3,8 @@ services:
     image: minio/minio
     container_name: minio
     ports:
-      - "9000:9000" # Porta para acessar a API S3
-      - "9090:9090" # Porta para acessar o painel administrativo
+      - "9000:9000" # Port to access S3 API
+      - "9090:9090" # Port to access the administrative panel
     environment:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER}
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}

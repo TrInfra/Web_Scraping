@@ -3,5 +3,5 @@ bs4
 re
 pandas
 math
-boto3
+minio
 

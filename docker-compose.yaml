@@ -1,18 +1,4 @@
 services:
-  app:
-    build: .
-    container_name: webscraping-app
-    ports:
-      - "5000:5000"
-    environment:
-      - MINIO_ROOT_USER=${MINIO_ROOT_USER}
-      - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}
-    volumes:
-      - .:/app 
-    command: ["/opt/venv/bin/python", "app.py"] 
-    depends_on:
-      - minio
-
   minio:
     image: minio/minio
     container_name: minio
